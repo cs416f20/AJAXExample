@@ -1,0 +1,57 @@
+{% extends 'yelp/base.html' %}
+
+{% block body %}
+
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h1 class="display-4 text-center">Yelp API</h1>
+
+            <div class="input-group mb-3">
+                <input type="number" class="form-control" placeholder="Enter a number" id="number-of-users">
+                <div class="input-group-append">
+                    <button class="btn btn-success" id="getMultipleUsers">Search</button>
+                </div>
+            </div>
+
+            <div id="results">
+
+                <div class="card mb-3" id="user-info">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://s3-media0.fl.yelpcdn.com/bphoto/F8OxoXdS51h2VfU9Je2cNQ/348s.jpg" class="card-img" alt="business-image">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <h3 class="card-title">Hussky Pizza</h3>
+                                    </div>
+                                    <div class="col-2">
+                                        <p class="card-text"><small class="text-muted">0.97 mi </small></p>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-start no-gutters">
+                                    <div class="col-4   ">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="card-text"><small class="text-muted">27 Reviews</small></p>
+
+                                    </div>
+                                </div>
+                                <p class="card-text text-muted">Address adress adress</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

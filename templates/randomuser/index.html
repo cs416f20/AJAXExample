@@ -1,0 +1,51 @@
+{% extends 'randomuser/base.html' %}
+
+{% block body %}
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="display-4">Random User API</h1>
+
+            <div class="row">
+                <div class="col-6">
+                    <button class="btn btn-primary btn-block" id="getOneUser">Get 1 random user</button>
+                </div>
+                <div class="col-6">
+
+
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" placeholder="Enter a number" id="number-of-users">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" id="getMultipleUsers">Get random users</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card mb-3" id="user-info" style="display: none">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img id="profile-img" class="card-img" alt="profile-image">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><span id="name"></span></h5>
+                            <p class="card-text">Email: <span id="email"></span></p>
+                            <p class="card-text">Phone: <span id="phone"></span></p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="multiple-user-container"></div>
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
