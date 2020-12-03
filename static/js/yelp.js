@@ -18,30 +18,61 @@ $(document).ready(function () {
                 //console.log(data);
                 // Grab the results from the API JSON return
                 const totalResults = data.total;
-                console.log(totalResults);
                 // If our results are greater than 0, continue
                 if (totalResults > 0){
-                    // Display a header on the page with the number of results
-                    $('#results').append('<h5>We discovered ' + totalResults + ' results!</h5>');
-                    // Itirate through the JSON array of 'businesses' which was returned by the API
+                    // Iterate through the JSON array of 'businesses' returned by the API
                     $.each(data.businesses, function(i, item) {
+
                         // Store each business's object in a variable
-                        const id = item.id;
-                        const alias = item.alias;
                         const phone = item.display_phone;
                         const image = item.image_url;
                         const name = item.name;
                         const rating = item.rating;
-                        const reviewcount = item.review_count;
+                        const price = item.price;
+                        const distance = displayDistance(item.distance);
+                        const reviewCount = item.review_count;
                         const address = item.location.address1;
                         const city = item.location.city;
-                        const state = item.location.state;
                         const zipcode = item.location.zip_code;
+                        const transactions = item.transactions;
+
                         // Append our result into our page
-                        $('#results').append('' +
-                            '<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;">' +
-                            '<img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b> (' + alias + ')<br>Business ID: ' + id + '<br> Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>The phone number for this business is: ' + phone + '<br>This business has a rating of ' + rating + ' with ' + reviewcount + ' reviews.</div>');
-                  });
+                        $('#results').append('                    ' +
+                            '<div class="card mb-3" id="user-info">\n' +
+                            '                        <div class="row no-gutters">\n' +
+                            '                            <div class="col-md-4">\n' +
+                            `                                <img src="${image}" class="card-img" alt="business-image">\n` +
+                            '                            </div>\n' +
+                            '                            <div class="col-md-8">\n' +
+                            '                                <div class="card-body">\n' +
+                            '                                    <div class="row">\n' +
+                            '                                        <div class="col-md-9">\n' +
+                            `                                            <h3 class="card-title">${name}</h3>\n` +
+                            '                                        </div>\n' +
+                            '                                        <div class="col-md-3">\n' +
+                            `                                            <small class="text-muted">${distance}</small>\n` +
+                            '                                            <br>\n' +
+                            `                                            <small class="text-success font-weight-bold">${price}</small>\n` +
+                            '                                        </div>\n' +
+                            '                                    </div>\n' +
+                            '                                    <div class="row justify-content-start no-gutters">\n' +
+                            '                                        <div class="col-md-5 col-12">\n' +
+                            `                                           <div id="rating-${i}"></div>\n` +
+                            '                                        </div>\n' +
+                            '                                        <div class="col-md-7 col-12">\n' +
+                            `                                            <p class="card-text text-muted">${reviewCount} reviews</p>\n` +
+                            '                                        </div>\n' +
+                            '                                    </div>\n' +
+                            `                                    <p class="card-text text-muted">${address} <br>${city}, ${zipcode}</p>\n` +
+                            `                                    <p class="card-text text-muted">Phone: ${phone}</p>\n` +
+                            `                                      <div id="transaction-${i}"></div>\n` +
+                            '                                </div>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </div');
+                        ratingGenerator(parseInt(rating), i);
+                        transactionGenerator(transactions, i);
+                    });
                 } else {
                     // If our results are 0; no businesses were returned by the JSON therefor we display on the page no results were found
                     $('#results').append('<h5>We discovered no results!</h5>');
@@ -50,4 +81,32 @@ $(document).ready(function () {
             }
         });
     });
+
+    // A function to convert from meters to miles
+    function displayDistance(distance) {
+        const milesPerMeter = 0.000621371;
+        const distanceInMiles= distance * milesPerMeter;
+        return distanceInMiles.toFixed(2) + 'mi';
+    }
+
+    function ratingGenerator(rating, index) {
+        // 5-star rating generated via fa-star from fontAwesome
+        for (let i = 0; i < 5; i++) {
+            if (i < rating){
+                $('#rating-'+index).append('<span class="fa fa-star checked"></span>');
+            }
+            else{
+                $('#rating-'+index).append('<span class="fa fa-star"></span>');
+            }
+        }
+    }
+
+    // A function to generate badge-pill for different transaction information of each business
+    function transactionGenerator(transactions, index) {
+        for (const transaction of transactions) {
+            $('#transaction-'+index).append(`<span class="badge badge-pill badge-primary">${transaction}</span>`);
+        }
+    }
+
+
 });
