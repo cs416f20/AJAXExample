@@ -1,6 +1,13 @@
 $(document).ready(function () {
     $('button').click(function () {
 
+        // Clear before adding in case the user clicks the button twice
+        $('#results').empty();
+
+        // Get the search term and location from the input elements
+        const searchTerm = $('input[name=search_term]').val();
+        const location = $('input[name=location]').val();
+
         //This API enables cross-origin requests to anywhere
         // This will probably be very confusing for you to understand as to why we need another url in front of the actual url
         // However, browsers like Chrome prevents non-cross-origin requests, so this is a workaround for that
@@ -9,7 +16,7 @@ $(document).ready(function () {
         $.ajax({
             url: corsAnywhereURL + 'https://api.yelp.com/v3/businesses/search',
             dataType: 'json',
-            data: {'term': 'pizza', 'location': 'boston'},
+            data: {'term': searchTerm, 'location': location},
             method: 'GET',
             headers: {
                 'Authorization':'Bearer R2gFPcNg1KkOib427cLS6AoTewOjhyBG25hO02kJA-kg5JG4WUSFQD-w0BP588FkVFpbPliemjEjs_NYXUjDfiBNX_hAmGz78tD47dB0XF39AA99irMsBM1UGfzCX3Yx',
