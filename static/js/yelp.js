@@ -45,7 +45,7 @@ $(document).ready(function () {
 
                         // Append our result into our page
                         $('#results').append('                    ' +
-                            '<div class="card mb-3" id="user-info">\n' +
+                            '                <div class="card mb-3"\n' +
                             '                        <div class="row no-gutters">\n' +
                             '                            <div class="col-md-4">\n' +
                             `                                <img src="${image}" class="card-img" alt="business-image">\n` +
