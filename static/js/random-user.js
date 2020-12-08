@@ -16,7 +16,7 @@ $(document).ready(function () {
             success: function(data) {
                 //console.log(data);
                 const result = data.results[0];
-                const firstName = result.name.first;
+                const firstName = result.name['first'];
                 const lastName = result.name.last;
                 const email = result.email;
                 const phone = result.phone;

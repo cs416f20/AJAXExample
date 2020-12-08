@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('randomuser/', include('randomuser.urls')),
     path('yelp/', include('yelp.urls')),
+    path('game/', include('game.urls')),
 ]

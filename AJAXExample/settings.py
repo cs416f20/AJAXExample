@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'randomuser.apps.RandomuserConfig',
     'yelp.apps.YelpConfig',
+    'game.apps.GameConfig',
 ]
 
 MIDDLEWARE = [
